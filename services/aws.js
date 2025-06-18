@@ -13,7 +13,7 @@ const s3 = new S3Client({
 // Función para subir un archivo a S3
 exports.uploadFileAWSInternal = async (namePdf, pdfBuffer) => {
   const uploadParams = {
-    Bucket: config.AWS_S3_IMAGES_BUCKET, // Nombre del bucket en S3
+    Bucket: config.IMAGES, // Nombre del bucket en S3
     Key: namePdf, // Nombre del archivo en S3
     Body: pdfBuffer, // El buffer del archivo
     ContentType: "application/pdf", // Tipo de archivo
