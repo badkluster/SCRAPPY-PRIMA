@@ -261,7 +261,7 @@ async function procesarIntervalo(desde, hasta, acumuladas) {
 
 async function obtenerTodasLasPolizasHistoricas() {
   const lastRun = readLastRunDate();
-  const defaultStart = new Date("2025-06-17");
+  const defaultStart = new Date("2024-01-01");
   const inicioGeneral = lastRun || defaultStart;
   const finGeneral = new Date(); // Hasta hoy
 
