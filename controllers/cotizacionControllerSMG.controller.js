@@ -259,10 +259,18 @@ async function procesarIntervalo(desde, hasta, acumuladas) {
   }
 }
 
-async function obtenerTodasLasPolizasHistoricas() {
+async function obtenerTodasLasPolizasHistoricas(req, res) {
+  const queryFecha = req?.query?.fechaInicio
+    ? new Date(req.query.fechaInicio)
+    : null;
+
+  console.log("🔍 Iniciando proceso histórico de pólizas...");
+
+  // 2. Si no hay fecha en query, usar la guardada en JSON (lastRun), si no, usar fija
   const lastRun = readLastRunDate();
-  const defaultStart = new Date("2024-01-01");
-  const inicioGeneral = lastRun || defaultStart;
+  const defaultStart = new Date("2025-06-17");
+
+  const inicioGeneral = queryFecha || lastRun || defaultStart;
   const finGeneral = new Date(); // Hasta hoy
 
   const acumuladas = [];
@@ -340,6 +348,8 @@ async function obtenerTodasLasPolizasHistoricas() {
   }
 
   console.log("\n✅ Proceso finalizado.");
+
+  res.status(200).json({ message: "Proceso finalizado." });
 }
 
 function guardarErroresEnJson(errores) {
